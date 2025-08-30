@@ -1,0 +1,36 @@
+nav {
+  
+  padding: 12px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+nav a {
+  color: rgb(0, 0, 0);
+  margin-right: 15px;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px;
+  border-radius: 100px;
+   color: #0077b6;
+}
+
+
+nav span {
+  color: #ffb703;
+  margin-right: 10px;
+}
+
+nav button {
+  background: #ff4d4d;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+nav button:hover {
+  background: #cc0000;
+}
