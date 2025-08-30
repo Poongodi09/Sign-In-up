@@ -69,3 +69,55 @@
     transform: translateY(0px);
   }
 }
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .home-container {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .home-content {
+    padding-right: 0;
+    text-align: center;
+  }
+
+  .welcome-box {
+    flex-direction: column; /* stack content and image vertically */
+    gap: 15px;
+  }
+
+  .welcome-content p {
+    font-size: 28px;
+  }
+
+  .welcome-image img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .welcome-content p {
+    font-size: 24px;
+  }
+
+  .welcome-image img {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-content h1 {
+    font-size: 2rem;
+  }
+
+  .welcome-content p {
+    font-size: 20px;
+  }
+
+  .welcome-image img {
+    max-width: 250px;
+  }
+}
