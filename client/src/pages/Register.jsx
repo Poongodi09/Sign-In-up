@@ -7,10 +7,18 @@ const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState(""); // ✅ added
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // ✅ Check confirm password before sending request
+    if (password !== confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+
     try {
       await axios.post("https://sign-in-up-backend-1w61.onrender.com/api/auth/register", {
         name,
@@ -47,6 +55,13 @@ const Register = () => {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Confirm Password"   // ✅ added
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
         <button type="submit">Register</button>
