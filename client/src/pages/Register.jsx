@@ -25,14 +25,16 @@ const Register = () => {
 
     try {
       await axios.post(
-        "https://sign-in-up-backend-1w61.onrender.com/api/auth/register",
-        {
-          name: name.trim(),
-          email: email.trim(),
-          password: password.trim(),
-          confirmPassword: confirmPassword.trim(), // send to backend
-        }
-      );
+  "https://sign-in-up-backend-1w61.onrender.com/api/auth/register",
+  {
+    name: name.trim(),
+    email: email.trim().toLowerCase(),
+    password: password.trim(),
+    confirmPassword: confirmPassword.trim(),
+  }
+);
+
+      
       alert("Registered successfully!");
       navigate("/login");
     } catch (err) {
