@@ -7,6 +7,7 @@ import "../styles/Auth.css";
 const Login = () => {
   const [email, setEmail] = useState("");      
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // 👁️ toggle
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -25,10 +26,30 @@ const Login = () => {
     <div className="auth-container">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <input type="email" placeholder="Email" value={email}
-          onChange={(e) => setEmail(e.target.value)} required />
-        <input type="password" placeholder="Password" value={password}
-          onChange={(e) => setPassword(e.target.value)} required />
+        <input 
+          type="email" 
+          placeholder="Email" 
+          value={email}
+          onChange={(e) => setEmail(e.target.value)} 
+          required 
+        />
+
+        <div className="password-wrapper">
+          <input 
+            type={showPassword ? "text" : "password"} 
+            placeholder="Password" 
+            value={password}
+            onChange={(e) => setPassword(e.target.value)} 
+            required 
+          />
+          <span 
+            className="toggle-password" 
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? "👁️" : "🙈"}
+          </span>
+        </div>
+
         <button type="submit">Login</button>
       </form>
     </div> 
