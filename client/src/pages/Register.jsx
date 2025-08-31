@@ -7,25 +7,22 @@ const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState(""); // ✅ added
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // ✅ Check confirm password before sending request
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
-
     try {
-      await axios.post("https://sign-in-up-backend-1w61.onrender.com/api/auth/register", {
-        name,
-        email,
-        password,
-        confirmPassword,
-      });
+      await axios.post(
+        "https://sign-in-up-backend-1w61.onrender.com/api/auth/register",
+        { name, email, password, confirmPassword }
+      );
       alert("Registered successfully!");
       navigate("/login");
     } catch (err) {
@@ -35,37 +32,61 @@ const Register = () => {
 
   return (
     <div className="auth-container">
-      <h2>Registers</h2>
+      <h2>Register</h2>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Confirm Password"   // ✅ added
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Register</button>
+        <div className="input-group underline">
+          <span className="icon user"></span>
+          <input
+            type="text"
+            placeholder="Full Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="input-group underline">
+          <span className="icon email"></span>
+          <input
+            type="email"
+            placeholder="Email Address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="input-group underline">
+          <span className="icon lock"></span>
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <span
+            className={`icon eye ${showPassword ? "active" : ""}`}
+            onClick={() => setShowPassword(!showPassword)}
+          ></span>
+        </div>
+
+        <div className="input-group underline">
+          <span className="icon lock"></span>
+          <input
+            type={showConfirmPassword ? "text" : "password"}
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
+          <span
+            className={`icon eye ${showConfirmPassword ? "active" : ""}`}
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+          ></span>
+        </div>
+
+        <button type="submit" className="btn">Register</button>
       </form>
     </div>
   );

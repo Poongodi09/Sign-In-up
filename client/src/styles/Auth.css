@@ -1,47 +1,106 @@
+/* Container */
 .auth-container {
-  width: 350px;
+  max-width: 400px;
   margin: 50px auto;
   padding: 25px;
-  border: 1px solid #e76f51;
-  border-radius: 8px;
-  box-shadow: 0px 3px 8px #e76f517a;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
 }
 
 .auth-container h2 {
-  text-align: center;
   margin-bottom: 20px;
-  color: #e76f51;
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
 }
 
-.auth-container form {
+/* Input group (underline style) */
+.input-group.underline {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+  border-bottom: 2px solid #ddd;
+  padding: 6px 0;
+  transition: border-color 0.3s;
 }
 
-.auth-container input {
-  padding: 10px;
-  margin: 8px 0;
-  border: 1px solid #e76f517a;
-  border-radius: 5px;
-}
-.auth-container input:hover{
-  box-shadow: 0px 3px 8px #e76f517a;
-
+.input-group.underline:focus-within {
+  border-color: #e76f51; /* underline active color */
 }
 
-.auth-container button {
-  padding: 10px;
-  margin-top: 15px;
-  margin-left: 130px;
-  color: #e76f51;
-  width: 90px;
-  border: 1px solid #e76f51;
-  background-color: #ffffff;
-  border-radius: 5px;
+.input-group.underline input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 15px;
+  padding: 8px;
+  color: #333;
+}
+
+.input-group.underline input::placeholder {
+  color: #888;
+}
+
+/* Icons */
+.icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  filter: grayscale(100%) brightness(40%);
+  opacity: 0.8;
   cursor: pointer;
 }
 
-.auth-container button:hover {
-  color: #e76f51;
-  box-shadow: 0px 3px 8px #e76f517a
+.icon.user {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/1077/1077114.png");
+}
+
+.icon.email {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/732/732200.png");
+}
+
+.icon.lock {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/3064/3064197.png");
+}
+
+.icon.eye {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/709/709612.png");
+  position: absolute;
+  right: 0;
+}
+
+.icon.eye.active {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/565/565655.png");
+}
+
+/* Button */
+.btn {
+  width: 100%;
+  padding: 12px;
+  background: #e76f51; /* primary color */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #cf5a3e; /* darker shade on hover */
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .auth-container {
+    margin: 20px;
+    padding: 20px;
+  }
 }

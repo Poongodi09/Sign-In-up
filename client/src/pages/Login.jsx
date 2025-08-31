@@ -25,11 +25,29 @@ const Login = () => {
     <div className="auth-container">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <input type="email" placeholder="Email" value={email}
-          onChange={(e) => setEmail(e.target.value)} required />
-        <input type="password" placeholder="Password" value={password}
-          onChange={(e) => setPassword(e.target.value)} required />
-        <button type="submit">Login</button>
+        <div className="input-group underline">
+          <span className="icon email"></span>
+          <input 
+            type="email" 
+            placeholder="Email" 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)} 
+            required 
+          />
+        </div>
+
+        <div className="input-group underline">
+          <span className="icon lock"></span>
+          <input 
+            type="password" 
+            placeholder="Password" 
+            value={password}
+            onChange={(e) => setPassword(e.target.value)} 
+            required 
+          />
+        </div>
+
+        <button type="submit" className="btn">Login</button>
       </form>
     </div> 
   );
