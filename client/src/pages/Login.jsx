@@ -31,7 +31,7 @@ const Login = () => {
 
   return (
     <div className="auth-container">
-      <h2>Login</h2>
+      <h2 style={{ color: '#e76f51'}}>Login</h2>
       <form onSubmit={handleSubmit}>
         <div className="input-group underline">
           <span className="icon email"></span>

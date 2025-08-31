@@ -36,7 +36,7 @@ const Register = () => {
 
   return (
     <div className="auth-container">
-      <h2>Register</h2>
+      <h2 style={{ color: '#e76f51'}}>Register</h2>
       <form onSubmit={handleSubmit}>
         <div className="input-group underline">
           <span className="icon user"></span>
