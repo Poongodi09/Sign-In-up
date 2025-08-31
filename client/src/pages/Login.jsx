@@ -7,17 +7,24 @@ import "../styles/Auth.css";
 const Login = () => {
   const [email, setEmail] = useState("");      
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false); // ✅ loading state
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://sign-in-up-backend-1w61.onrender.com/api/auth/login", { email, password });
+      setLoading(true); // start loading
+      const res = await axios.post(
+        "https://sign-in-up-backend-1w61.onrender.com/api/auth/login", 
+        { email, password }
+      );
       login(res.data.user, res.data.token);
       navigate("/");
     } catch (err) {
       alert(err.response?.data?.message || "Login failed");
+    } finally {
+      setLoading(false); // stop loading
     }
   };
 
@@ -47,7 +54,9 @@ const Login = () => {
           />
         </div>
 
-        <button type="submit" className="btn">Login</button>
+        <button type="submit" className="btn" disabled={loading}>
+          {loading ? "Logging in..." : "Login"}
+        </button>
       </form>
     </div> 
   );
