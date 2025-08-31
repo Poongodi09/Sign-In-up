@@ -46,6 +46,7 @@
 }
 
 /* Icons */
+/* Icons (default desktop) */
 .icon {
   width: 18px;
   height: 18px;
@@ -56,6 +57,15 @@
   opacity: 0.8;
   cursor: pointer;
 }
+
+/* Mobile: force grey icons */
+@media (max-width: 500px) {
+  .icon {
+    filter: grayscale(100%) brightness(20%) !important;
+    opacity: 1;
+  }
+}
+
 
 .icon.user {
   background-image: url("https://cdn-icons-png.flaticon.com/512/1077/1077114.png");
