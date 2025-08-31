@@ -24,6 +24,7 @@ const Register = () => {
         name,
         email,
         password,
+        confirmPassword,
       });
       alert("Registered successfully!");
       navigate("/login");
