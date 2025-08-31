@@ -7,16 +7,21 @@ const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState(""); // add this
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://sign-in-up-backend-1w61.onrender.com/api/auth/register", {
-        name,
-        email,
-        password,
-      });
+      await axios.post(
+        "https://sign-in-up-backend-1w61.onrender.com/api/auth/register",
+        {
+          name,
+          email: email.trim().toLowerCase(), // trim & lowercase
+          password: password.trim(),
+          confirmPassword: confirmPassword.trim(), // send confirmPassword
+        }
+      );
       alert("Registered successfully!");
       navigate("/login");
     } catch (err) {
@@ -47,6 +52,13 @@ const Register = () => {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
         <button type="submit">Register</button>

@@ -10,16 +10,23 @@ const Login = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post("https://sign-in-up-backend-1w61.onrender.com/api/auth/login", { email, password });
-      login(res.data.user, res.data.token);
-      navigate("/");
-    } catch (err) {
-      alert(err.response?.data?.message || "Login failed");
-    }
-  };
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const res = await axios.post(
+      "https://sign-in-up-backend-1w61.onrender.com/api/auth/login",
+      {
+        email: email.trim().toLowerCase(), // trim & lowercase
+        password: password.trim(),
+      }
+    );
+    login(res.data.user, res.data.token);
+    navigate("/");
+  } catch (err) {
+    alert(err.response?.data?.message || "Login failed");
+  }
+};
+
 
   return (
     <div className="auth-container">
