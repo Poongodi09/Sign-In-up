@@ -1,11 +1,16 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import { UseAuth } from "./../Context/AuthContext";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "./../Context/AuthContext";  // ✅ correct import
 import "../styles/Navbar.css";   
 
 const Navbar = () => {
-  
-  const { user, logout } = UseAuth();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();             // clear state + localStorage
+    navigate("/login");   // ✅ redirect to login after logout
+  };
 
   return (
     <nav>
@@ -21,7 +26,7 @@ const Navbar = () => {
         ) : (
           <>
             <span>Hello, {user.name}</span>
-            <button onClick={logout}>Logout</button>
+            <button onClick={handleLogout}>Logout</button>
           </>
         )}
       </div>

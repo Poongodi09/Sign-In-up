@@ -1,34 +1,54 @@
-import React, { createContext, useState, useEffect, useContext } from "react";
+import React, { createContext, useReducer, useContext } from "react";
 
-export const AuthContext = createContext();
+// ✅ Initial State
+const initialState = {
+  user: JSON.parse(localStorage.getItem("user")) || null,
+  token: localStorage.getItem("token") || null,
+};
 
+// ✅ Reducer Function
+const authReducer = (state, action) => {
+  switch (action.type) {
+    case "LOGIN":
+      return {
+        ...state,
+        user: action.payload.user,
+        token: action.payload.token,
+      };
+    case "LOGOUT":
+      return { ...state, user: null, token: null };
+    default:
+      return state;
+  }
+};
+
+// ✅ Create Context
+const AuthContext = createContext();
+
+// ✅ Provider
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [state, dispatch] = useReducer(authReducer, initialState);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    const userData = localStorage.getItem("user");
-    if (token && userData) setUser(JSON.parse(userData));
-  }, []);
-
+  // login function
   const login = (userData, token) => {
-    localStorage.setItem("token", token);
     localStorage.setItem("user", JSON.stringify(userData));
-    setUser(userData);
+    localStorage.setItem("token", token);
+    dispatch({ type: "LOGIN", payload: { user: userData, token } });
   };
 
+  // logout function
   const logout = () => {
-    localStorage.removeItem("token");
     localStorage.removeItem("user");
-    setUser(null);
+    localStorage.removeItem("token");
+    dispatch({ type: "LOGOUT" });
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ ...state, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-
-export const UseAuth = () => useContext(AuthContext)
+// ✅ Custom Hook
+export const useAuth = () => useContext(AuthContext);

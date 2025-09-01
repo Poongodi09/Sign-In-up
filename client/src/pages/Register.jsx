@@ -10,7 +10,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [loading, setLoading] = useState(false); // ✅ loading state
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -20,7 +20,7 @@ const Register = () => {
       return;
     }
     try {
-      setLoading(true); // start loading
+      setLoading(true);
       await axios.post(
         "https://sign-in-up-backend-1w61.onrender.com/api/auth/register",
         { name, email, password, confirmPassword }
@@ -30,7 +30,7 @@ const Register = () => {
     } catch (err) {
       alert(err.response?.data?.message || "Error registering");
     } finally {
-      setLoading(false); // stop loading
+      setLoading(false);
     }
   };
 

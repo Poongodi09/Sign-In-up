@@ -1,31 +1,31 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../Context/AuthContext";
+import { useAuth } from "../Context/AuthContext";
 import "../styles/Auth.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");      
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // ✅ toggle state
-  const [loading, setLoading] = useState(false); 
-  const { login } = useContext(AuthContext);
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true); 
+      setLoading(true);
       const res = await axios.post(
         "https://sign-in-up-backend-1w61.onrender.com/api/auth/login", 
         { email, password }
       );
-      login(res.data.user, res.data.token);
+      login(res.data.user, res.data.token); // ✅ dispatch LOGIN
       navigate("/");
     } catch (err) {
       alert(err.response?.data?.message || "Login failed");
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
@@ -47,7 +47,7 @@ const Login = () => {
         <div className="input-group underline">
           <span className="icon lock"></span>
           <input 
-            type={showPassword ? "text" : "password"} // ✅ toggle password
+            type={showPassword ? "text" : "password"} 
             placeholder="Password" 
             value={password}
             onChange={(e) => setPassword(e.target.value)} 
@@ -63,7 +63,7 @@ const Login = () => {
           {loading ? "Logging in..." : "Login"}
         </button>
       </form>
-    </div> 
+    </div>
   );
 };
 
